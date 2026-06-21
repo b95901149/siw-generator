@@ -1,0 +1,92 @@
+{
+  "format": "siw-generator-module",
+  "version": 1,
+  "kind": "ssiw",
+  "saved_at": "2026-06-21T22:20:14+08:00",
+  "title": "SSIW-120GHz_Slot8",
+  "substrate_length_mm": 5.0,
+  "substrate_width_mm": 5.0,
+  "substrate_height_mm": 0.127,
+  "copper_thickness_um": 15.0,
+  "material": "rt5880_lossy",
+  "center_freq_ghz": 120.0,
+  "vias": [
+    {
+      "x_mm": -1.9500000000000002,
+      "y_mm": -0.5135,
+      "type": "slot",
+      "w_mm": 0.15,
+      "h_mm": 0.15,
+      "length_mm": 1.0,
+      "corner_r_mm": 0.015
+    },
+    {
+      "x_mm": -1.9500000000000002,
+      "y_mm": 0.5135,
+      "type": "slot",
+      "w_mm": 0.15,
+      "h_mm": 0.15,
+      "length_mm": 1.0,
+      "corner_r_mm": 0.015
+    },
+    {
+      "x_mm": -0.65,
+      "y_mm": -0.5135,
+      "type": "slot",
+      "w_mm": 0.15,
+      "h_mm": 0.15,
+      "length_mm": 1.0,
+      "corner_r_mm": 0.015
+    },
+    {
+      "x_mm": -0.65,
+      "y_mm": 0.5135,
+      "type": "slot",
+      "w_mm": 0.15,
+      "h_mm": 0.15,
+      "length_mm": 1.0,
+      "corner_r_mm": 0.015
+    },
+    {
+      "x_mm": 0.65,
+      "y_mm": -0.5135,
+      "type": "slot",
+      "w_mm": 0.15,
+      "h_mm": 0.15,
+      "length_mm": 1.0,
+      "corner_r_mm": 0.015
+    },
+    {
+      "x_mm": 0.65,
+      "y_mm": 0.5135,
+      "type": "slot",
+      "w_mm": 0.15,
+      "h_mm": 0.15,
+      "length_mm": 1.0,
+      "corner_r_mm": 0.015
+    },
+    {
+      "x_mm": 1.9500000000000002,
+      "y_mm": -0.5135,
+      "type": "slot",
+      "w_mm": 0.15,
+      "h_mm": 0.15,
+      "length_mm": 1.0,
+      "corner_r_mm": 0.015
+    },
+    {
+      "x_mm": 1.9500000000000002,
+      "y_mm": 0.5135,
+      "type": "slot",
+      "w_mm": 0.15,
+      "h_mm": 0.15,
+      "length_mm": 1.0,
+      "corner_r_mm": 0.015
+    }
+  ],
+  "siw_width_mm": 1.027,
+  "slot_width_mm": 0.15,
+  "slot_length_mm": 1.0,
+  "slot_corner_r_mm": 0.015,
+  "slot_pitch_mm": 1.3
+}

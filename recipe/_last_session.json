@@ -1,0 +1,257 @@
+{
+  "format": "siw-generator-recipe",
+  "version": 1,
+  "saved_at": "2026-06-22T02:21:24+08:00",
+  "recipe_name": "200GHz-3",
+  "active_tab": "circular",
+  "circular": {
+    "design_name": "0_9mmWidth2",
+    "freq_ghz": "1.0000",
+    "via_diameter": "0.1500",
+    "siw_length": "5.1700",
+    "substrate_width": "5.0000",
+    "substrate_height": "0.1270",
+    "copper_thickness_um": "15",
+    "substrate_material": "Rogers RT-duroid 5880 (lossy)",
+    "siw_width": "0.9000",
+    "via_pitch": "0.2800",
+    "via_count": "36",
+    "leakage_margin_factor": "0.5",
+    "port1_x": "",
+    "port2_x": "",
+    "port1_enabled": true,
+    "port2_enabled": true,
+    "port_height_factor": "1.2362",
+    "port_width_factor": "1.0000"
+  },
+  "slot": {
+    "design_name": "120GHz_Slot8",
+    "freq_ghz": "120",
+    "siw_length": "5",
+    "substrate_width": "5.0000",
+    "substrate_height": "0.127",
+    "copper_thickness_um": "15",
+    "substrate_material": "Rogers RT-duroid 5880 (lossy)",
+    "siw_width": "1.0270",
+    "slot_width": "0.15",
+    "slot_length": "1",
+    "slot_corner_r": "0.015",
+    "slot_pitch": "1.3",
+    "slot_count": "6",
+    "leakage_margin_factor": "0.5",
+    "port1_x": "",
+    "port2_x": "",
+    "port1_enabled": true,
+    "port2_enabled": true,
+    "port_height_factor": "1.2362",
+    "port_width_factor": "1.0000"
+  },
+  "compose": {
+    "format": "siw-generator-compose-recipe",
+    "version": 1,
+    "recipe_name": "",
+    "m_count": 3,
+    "n_count": 3,
+    "default_pitch_x_mm": 10.0,
+    "default_pitch_y_mm": 10.0,
+    "col_pitch_mm": [
+      5.17,
+      5.17,
+      5.17
+    ],
+    "row_pitch_mm": [
+      5.0,
+      5.0,
+      5.0
+    ],
+    "fill_material": "rt5880_lossy",
+    "fill_stackup": {
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0
+    },
+    "substrate_frame": [
+      -7.755,
+      -7.5,
+      7.755,
+      7.5
+    ],
+    "filled_cells": [],
+    "placements": [
+      {
+        "col": 1,
+        "row": 1,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 2,
+        "row": 1,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 0,
+        "row": 1,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 0,
+        "row": 2,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 1,
+        "row": 2,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 2,
+        "row": 2,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 0,
+        "row": 0,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 1,
+        "row": 0,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 2,
+        "row": 0,
+        "source": "RSIW-0_9mmWidth.json",
+        "label": "RSIW-0_9mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      }
+    ],
+    "ports": [
+      {
+        "col": 2,
+        "row": 2,
+        "edge": "right",
+        "position_mm": 5.0,
+        "width_mm": 0.9000000000000004,
+        "via_index": 26,
+        "via_index_2": 27,
+        "span_a_mm": 4.55,
+        "span_b_mm": 5.45
+      },
+      {
+        "col": 2,
+        "row": 1,
+        "edge": "right",
+        "position_mm": 0.0,
+        "width_mm": 0.9,
+        "via_index": 26,
+        "via_index_2": 27,
+        "span_a_mm": -0.45,
+        "span_b_mm": 0.45
+      },
+      {
+        "col": 2,
+        "row": 0,
+        "edge": "right",
+        "position_mm": -5.0,
+        "width_mm": 0.9000000000000004,
+        "via_index": 26,
+        "via_index_2": 27,
+        "span_a_mm": -5.45,
+        "span_b_mm": -4.55
+      },
+      {
+        "col": 0,
+        "row": 0,
+        "edge": "left",
+        "position_mm": -5.0,
+        "width_mm": 0.9000000000000004,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": -5.45,
+        "span_b_mm": -4.55
+      },
+      {
+        "col": 0,
+        "row": 1,
+        "edge": "left",
+        "position_mm": 0.0,
+        "width_mm": 0.9,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": -0.45,
+        "span_b_mm": 0.45
+      },
+      {
+        "col": 0,
+        "row": 2,
+        "edge": "left",
+        "position_mm": 5.0,
+        "width_mm": 0.9000000000000004,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": 4.55,
+        "span_b_mm": 5.45
+      }
+    ],
+    "grid_vars": {
+      "m_count": "3",
+      "n_count": "3",
+      "default_pitch_x": "10.0",
+      "default_pitch_y": "10.0",
+      "fill_height": "0.127",
+      "fill_copper_um": "15",
+      "leakage_margin_factor": "0",
+      "import_length": "10.0000",
+      "import_width": "10.0000",
+      "import_height": "0.1270",
+      "import_copper_um": "15.0000"
+    }
+  },
+  "ui_state": {
+    "main_sash_ratio": 0.5306553911205074,
+    "module_sash_ratio": 0.3729792147806005
+  }
+}

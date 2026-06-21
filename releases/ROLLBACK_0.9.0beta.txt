@@ -1,0 +1,20 @@
+SIW Via Generator — Release 0.9.0beta
+========================================
+
+Build output: dist/SIW-Generator_0.9.0beta/
+
+Rollback options:
+1. Keep the dist/SIW-Generator_0.9.0beta/ folder as a frozen snapshot.
+2. In git (when available): tag this commit as v0.9.0beta
+   git tag -a v0.9.0beta -m "Milestone: compose, combination CST, 0.9.0beta"
+   git branch release/0.9.0beta
+
+Included user data (from dev tree at build time):
+- recipe/ (5 JSON)
+- module/ (4 JSON)
+- combination/ (3 JSON)
+
+Key source changes in this milestone:
+- Compose panel, combination_io, compose_cst_export
+- Window title shows version
+- Substrate frame CST copper merge

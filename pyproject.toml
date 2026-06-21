@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "siw-generator"
+version = "0.9.0beta"
+description = "SIW generator"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "ezdxf>=1.3.0",
+  "matplotlib>=3.8.0",
+]
+
+[project.optional-dependencies]
+cst = [
+  "cadquery>=2.4.0",
+]
+
+[project.scripts]
+siw-generator = "siw_generator.cli:main"
+siw-generator-gui = "siw_generator.gui:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

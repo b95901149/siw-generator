@@ -1,0 +1,282 @@
+{
+  "format": "siw-generator-combination",
+  "version": 1,
+  "saved_at": "2026-06-21T23:39:25+08:00",
+  "title": "tripleSIW",
+  "layout": {
+    "format": "siw-generator-compose-recipe",
+    "version": 1,
+    "recipe_name": "tripleSIW",
+    "m_count": 3,
+    "n_count": 3,
+    "default_pitch_x_mm": 10.0,
+    "default_pitch_y_mm": 10.0,
+    "col_pitch_mm": [
+      5.0,
+      5.0,
+      5.0
+    ],
+    "row_pitch_mm": [
+      5.0,
+      5.0,
+      5.0
+    ],
+    "fill_material": "rt5880_lossy",
+    "fill_stackup": {
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0
+    },
+    "substrate_frame": null,
+    "filled_cells": [],
+    "placements": [
+      {
+        "col": 1,
+        "row": 1,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      },
+      {
+        "col": 2,
+        "row": 1,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      },
+      {
+        "col": 0,
+        "row": 1,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      },
+      {
+        "col": 1,
+        "row": 0,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      },
+      {
+        "col": 2,
+        "row": 0,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      },
+      {
+        "col": 1,
+        "row": 2,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      },
+      {
+        "col": 2,
+        "row": 2,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      },
+      {
+        "col": 0,
+        "row": 2,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      },
+      {
+        "col": 0,
+        "row": 0,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false
+      }
+    ],
+    "ports": [
+      {
+        "col": 2,
+        "row": 1,
+        "edge": "right",
+        "position_mm": 0.0,
+        "width_mm": 1.027,
+        "via_index": 6,
+        "via_index_2": 7,
+        "span_a_mm": -0.5135,
+        "span_b_mm": 0.5135
+      },
+      {
+        "col": 2,
+        "row": 0,
+        "edge": "right",
+        "position_mm": -5.0,
+        "width_mm": 1.0269999999999992,
+        "via_index": 6,
+        "via_index_2": 7,
+        "span_a_mm": -5.5135,
+        "span_b_mm": -4.4865
+      },
+      {
+        "col": 0,
+        "row": 1,
+        "edge": "left",
+        "position_mm": 0.0,
+        "width_mm": 1.027,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": -0.5135,
+        "span_b_mm": 0.5135
+      },
+      {
+        "col": 0,
+        "row": 0,
+        "edge": "left",
+        "position_mm": -5.0,
+        "width_mm": 1.0269999999999992,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": -5.5135,
+        "span_b_mm": -4.4865
+      },
+      {
+        "col": 0,
+        "row": 2,
+        "edge": "left",
+        "position_mm": 5.0,
+        "width_mm": 1.0269999999999992,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": 4.4865,
+        "span_b_mm": 5.5135
+      },
+      {
+        "col": 2,
+        "row": 2,
+        "edge": "right",
+        "position_mm": 5.0,
+        "width_mm": 1.0269999999999992,
+        "via_index": 6,
+        "via_index_2": 7,
+        "span_a_mm": 4.4865,
+        "span_b_mm": 5.5135
+      }
+    ],
+    "grid_vars": {
+      "m_count": "3",
+      "n_count": "3",
+      "default_pitch_x": "10.0",
+      "default_pitch_y": "10.0",
+      "fill_height": "0.127",
+      "fill_copper_um": "15",
+      "leakage_margin_factor": "0",
+      "import_length": "10.0000",
+      "import_width": "10.0000",
+      "import_height": "0.1270",
+      "import_copper_um": "15.0000"
+    }
+  },
+  "modules": {
+    "SSIW-120GHz_Slot8.json": {
+      "format": "siw-generator-module",
+      "version": 1,
+      "kind": "ssiw",
+      "saved_at": "2026-06-21T23:39:25+08:00",
+      "title": "SSIW-120GHz_Slot8",
+      "substrate_length_mm": 5.0,
+      "substrate_width_mm": 5.0,
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0,
+      "material": "rt5880_lossy",
+      "center_freq_ghz": 120.0,
+      "vias": [
+        {
+          "x_mm": -1.9500000000000002,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -1.9500000000000002,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -0.65,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -0.65,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 0.65,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 0.65,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 1.9500000000000002,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 1.9500000000000002,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        }
+      ],
+      "siw_width_mm": 1.027,
+      "slot_width_mm": 0.15,
+      "slot_length_mm": 1.0,
+      "slot_corner_r_mm": 0.015,
+      "slot_pitch_mm": 1.3
+    }
+  },
+  "operations": []
+}
