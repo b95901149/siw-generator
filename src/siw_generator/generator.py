@@ -233,7 +233,10 @@ def generate_compose_cst(
 ) -> dict:
     """Generate a CST import package for a composed module layout."""
     from siw_generator.compose_cst_export import export_compose_cst_package
+    from siw_generator.compose_geometry import sync_layout_geometry
     from siw_generator.export_paths import make_cst_output_dir
+
+    sync_layout_geometry(layout)
 
     if output_dir is None:
         root = Path(project_root) if project_root else Path.cwd()

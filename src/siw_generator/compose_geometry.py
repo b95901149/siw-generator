@@ -214,6 +214,14 @@ def cell_center(col: int, row: int, layout: ComposeLayout) -> tuple[float, float
     return (x0 + x1) / 2.0, (y0 + y1) / 2.0
 
 
+def cell_stackup(layout: ComposeLayout, col: int, row: int) -> StackupParams:
+    """Stackup for a grid cell: placed module stackup, else fill stackup."""
+    placed = layout.placements.get((col, row))
+    if placed is not None:
+        return placed.module.stackup
+    return layout.fill_stackup
+
+
 def cell_at_point(x_mm: float, y_mm: float, layout: ComposeLayout) -> tuple[int, int] | None:
     xs = column_boundaries(layout)
     ys = row_boundaries(layout)
@@ -496,6 +504,7 @@ def apply_substrate_frame_from_rect(
     """Set compose outer substrate frame; expand to include occupied cells (no clipping)."""
     frame = merge_substrate_frame_with_content(layout, normalize_rect(x0, y0, x1, y1))
     layout.substrate_frame = frame
+    recompute_all_port_positions(layout)
     return frame
 
 
@@ -503,6 +512,22 @@ def grid_bounds(layout: ComposeLayout) -> tuple[float, float, float, float]:
     xs = column_boundaries(layout)
     ys = row_boundaries(layout)
     return xs[0], ys[0], xs[-1], ys[-1]
+
+
+def export_geometry_bounds(layout: ComposeLayout) -> tuple[float, float, float, float]:
+    """Bounding box used to center CST/STL/DXF exports at XY origin."""
+    if layout.substrate_frame is not None:
+        return layout.substrate_frame
+    bounds = occupied_cells_bounds(layout)
+    if bounds is not None:
+        return bounds
+    return grid_bounds(layout)
+
+
+def export_center_offset_mm(layout: ComposeLayout) -> tuple[float, float]:
+    """Shift to subtract so export geometry is centered at (0, 0)."""
+    x0, y0, x1, y1 = export_geometry_bounds(layout)
+    return (x0 + x1) / 2.0, (y0 + y1) / 2.0
 
 
 def occupied_cells_bounds(layout: ComposeLayout) -> tuple[float, float, float, float] | None:
@@ -634,6 +659,62 @@ def compute_leakage_substrate_frame(
             y1 += margin
 
     return merge_substrate_frame_with_content(layout, normalize_rect(x0, y0, x1, y1))
+
+
+def port_aperture_span(port: ComposePort) -> tuple[float, float]:
+    """Along-edge span (lo, hi) in world mm; prefers stored via span when available."""
+    if port.via_index_2 >= 0 and abs(port.span_b_mm - port.span_a_mm) > _PITCH_EPS:
+        return sorted((port.span_a_mm, port.span_b_mm))
+    half_w = port.width_mm / 2.0
+    return port.position_mm - half_w, port.position_mm + half_w
+
+
+def recompute_port_geometry(port: ComposePort, layout: ComposeLayout) -> bool:
+    """Refresh port world coordinates from stored via indices and current cell transform."""
+    key = (port.col, port.row)
+    placed = layout.placements.get(key)
+    if placed is None:
+        return False
+    if port.via_index < 0 or port.via_index_2 < 0:
+        return False
+    vias = placed.module.vias
+    if port.via_index >= len(vias) or port.via_index_2 >= len(vias):
+        return False
+
+    x0, y0, x1, y1 = cell_bounds(port.col, port.row, layout)
+    via_pos = {idx: (wx, wy) for idx, wx, wy, _ in _world_vias(placed, layout)}
+    if port.via_index not in via_pos or port.via_index_2 not in via_pos:
+        return False
+    wx1, wy1 = via_pos[port.via_index]
+    wx2, wy2 = via_pos[port.via_index_2]
+
+    if port.edge in ("left", "right"):
+        span_a, span_b = wy1, wy2
+    else:
+        span_a, span_b = wx1, wx2
+
+    lo, hi = sorted((span_a, span_b))
+    if hi - lo <= _PITCH_EPS:
+        return False
+
+    port.span_a_mm = lo
+    port.span_b_mm = hi
+    port.position_mm = (lo + hi) / 2.0
+    port.width_mm = hi - lo
+    return True
+
+
+def recompute_all_port_positions(layout: ComposeLayout) -> None:
+    for port in layout.ports:
+        recompute_port_geometry(port, layout)
+
+
+def sync_layout_geometry(layout: ComposeLayout) -> None:
+    """Reconcile pitch, module scales, and port coordinates after layout edits."""
+    sync_pitch_from_placements(layout)
+    for placed in layout.placements.values():
+        apply_cell_fit_scales(placed, layout)
+    recompute_all_port_positions(layout)
 
 
 def add_port(layout: ComposeLayout, candidate: PortCandidate) -> ComposePort:

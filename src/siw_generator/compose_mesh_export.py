@@ -10,24 +10,62 @@ from pathlib import Path
 import ezdxf
 from ezdxf import units
 
-from siw_generator.compose_cst_export import (
-    _RECT_EPS,
-    _is_slot_via,
-    _scale_via,
-    _world_point,
-)
 from siw_generator.compose_geometry import (
     ComposeLayout,
     PlacedModule,
     cell_bounds,
     cell_center,
+    cell_stackup,
+    export_center_offset_mm,
     grid_bounds,
+    port_aperture_span,
+    transform_placed_local,
 )
 from siw_generator.custom_geometry import CustomVia, CustomViaType, via_copper_z_range_mm
 from siw_generator.materials import get_material
 from siw_generator.stackup import StackupParams
 from siw_generator.stl_export import _box_triangles, _cylinder_triangles, _normal
 from siw_generator.via_shapes import slot_outline
+
+_RECT_EPS = 1e-4
+
+
+def _is_slot_via(via: CustomVia) -> bool:
+    if via.via_type == CustomViaType.SLOT:
+        return True
+    length = via.length_mm
+    return length is not None and length > via.w_mm * 1.05 and via.corner_r_mm is not None
+
+
+def _scale_via(via: CustomVia, scale_x: float, scale_y: float) -> CustomVia:
+    scale = max(scale_x, scale_y)
+    if abs(scale_x - 1.0) <= _RECT_EPS and abs(scale_y - 1.0) <= _RECT_EPS:
+        return via
+    length = via.length_mm * scale_x if via.length_mm is not None else None
+    corner = via.corner_r_mm * scale if via.corner_r_mm is not None else None
+    return CustomVia(
+        x_mm=via.x_mm,
+        y_mm=via.y_mm,
+        via_type=via.via_type,
+        via_role=via.via_role,
+        w_mm=via.w_mm * scale_y if via.via_type is CustomViaType.SLOT else via.w_mm * scale,
+        h_mm=via.h_mm * scale,
+        length_mm=length,
+        corner_r_mm=corner,
+    )
+
+
+def _world_point(
+    layout: ComposeLayout,
+    placed: PlacedModule,
+    cx: float,
+    cy: float,
+    lx: float,
+    ly: float,
+) -> tuple[float, float]:
+    tx, ty = transform_placed_local(placed, lx, ly)
+    ox, oy = export_center_offset_mm(layout)
+    return cx + tx - ox, cy + ty - oy
 
 
 def _extrude_polygon_tris(
@@ -139,32 +177,25 @@ def iter_compose_port_segments(layout: ComposeLayout) -> list[_PortSegment]:
     segments: list[_PortSegment] = []
     for idx, port in enumerate(layout.ports, start=1):
         x0, y0, x1, y1 = cell_bounds(port.col, port.row, layout)
-        half_w = port.width_mm / 2.0
+        span_lo, span_hi = port_aperture_span(port)
         label = f"PORT{idx}"
         if port.edge == "left":
             px = x0
-            segments.append(
-                _PortSegment(px, port.position_mm - half_w, px, port.position_mm + half_w, label)
-            )
+            segments.append(_PortSegment(px, span_lo, px, span_hi, label))
         elif port.edge == "right":
             px = x1
-            segments.append(
-                _PortSegment(px, port.position_mm - half_w, px, port.position_mm + half_w, label)
-            )
+            segments.append(_PortSegment(px, span_lo, px, span_hi, label))
         elif port.edge == "bottom":
             py = y0
-            segments.append(
-                _PortSegment(port.position_mm - half_w, py, port.position_mm + half_w, py, label)
-            )
+            segments.append(_PortSegment(span_lo, py, span_hi, py, label))
         else:
             py = y1
-            segments.append(
-                _PortSegment(port.position_mm - half_w, py, port.position_mm + half_w, py, label)
-            )
+            segments.append(_PortSegment(span_lo, py, span_hi, py, label))
     return segments
 
 
 def _world_slot_outline(
+    layout: ComposeLayout,
     placed: PlacedModule,
     cx: float,
     cy: float,
@@ -174,10 +205,11 @@ def _world_slot_outline(
     width = float(via.w_mm)
     corner = via.corner_r_mm if via.corner_r_mm is not None else min(width, length) / 2.0
     outline = slot_outline(via.x_mm, via.y_mm, length, width, corner)
-    return [_world_point(placed, cx, cy, px, py) for px, py in outline]
+    return [_world_point(layout, placed, cx, cy, px, py) for px, py in outline]
 
 
 def _world_square_corners(
+    layout: ComposeLayout,
     placed: PlacedModule,
     cx: float,
     cy: float,
@@ -191,7 +223,7 @@ def _world_square_corners(
         (via.x_mm + half_w, via.y_mm + half_h),
         (via.x_mm - half_w, via.y_mm + half_h),
     )
-    return [_world_point(placed, cx, cy, px, py) for px, py in corners]
+    return [_world_point(layout, placed, cx, cy, px, py) for px, py in corners]
 
 
 def _add_rect(msp, corners: tuple[tuple[float, float], ...], layer: str) -> None:
@@ -219,12 +251,14 @@ def export_compose_dxf(
     doc.layers.add("VIA_HOLE", color=1)
     doc.layers.add("INFO", color=8)
 
+    ox, oy = export_center_offset_mm(layout)
+
     for rect in iter_compose_stackup_rects(layout):
         corners = (
-            (rect.x0, rect.y0),
-            (rect.x1, rect.y0),
-            (rect.x1, rect.y1),
-            (rect.x0, rect.y1),
+            (rect.x0 - ox, rect.y0 - oy),
+            (rect.x1 - ox, rect.y0 - oy),
+            (rect.x1 - ox, rect.y1 - oy),
+            (rect.x0 - ox, rect.y1 - oy),
         )
         _add_rect(msp, corners, "DIELECTRIC_BOUNDARY")
         _add_rect(msp, corners, "COPPER_TOP")
@@ -236,21 +270,21 @@ def export_compose_dxf(
         for via in module.vias:
             scaled = _scale_via(via, placed.scale_x, placed.scale_y)
             if _is_slot_via(scaled):
-                outline = _world_slot_outline(placed, cx, cy, scaled)
+                outline = _world_slot_outline(layout, placed, cx, cy, scaled)
                 msp.add_lwpolyline(
                     [(*pt, 0.0) for pt in outline],
                     close=True,
                     dxfattribs={"layer": "VIA_HOLE"},
                 )
             elif scaled.via_type is CustomViaType.CIRCLE:
-                wx, wy = _world_point(placed, cx, cy, scaled.x_mm, scaled.y_mm)
+                wx, wy = _world_point(layout, placed, cx, cy, scaled.x_mm, scaled.y_mm)
                 msp.add_circle(
                     center=(wx, wy),
                     radius=scaled.w_mm / 2.0,
                     dxfattribs={"layer": "VIA_HOLE"},
                 )
             elif scaled.via_type is CustomViaType.SQUARE:
-                corners = _world_square_corners(placed, cx, cy, scaled)
+                corners = _world_square_corners(layout, placed, cx, cy, scaled)
                 msp.add_lwpolyline(
                     [(*pt, 0.0) for pt in corners],
                     close=True,
@@ -261,15 +295,16 @@ def export_compose_dxf(
         if seg.label not in doc.layers:
             doc.layers.add(seg.label, color=6)
         msp.add_line(
-            (seg.x0, seg.y0),
-            (seg.x1, seg.y1),
+            (seg.x0 - ox, seg.y0 - oy),
+            (seg.x1 - ox, seg.y1 - oy),
             dxfattribs={"layer": seg.label},
         )
 
     gx0, gy0, gx1, gy1 = grid_bounds(layout)
     stack = layout.fill_stackup
     info_lines = [
-        "CST_IMPORT=1 units=mm origin=grid_center",
+        "CST_IMPORT=1 units=mm origin=export_centered",
+        f"export_offset_mm={ox:.4f},{oy:.4f}",
         f"design={design_name}",
         f"grid_mm={layout.total_width_mm}x{layout.total_height_mm}",
         f"modules={len(layout.placements)}",
@@ -295,6 +330,7 @@ def export_compose_dxf(
 
 def _append_square_via_tris(
     triangles: list,
+    layout: ComposeLayout,
     placed: PlacedModule,
     cx: float,
     cy: float,
@@ -302,7 +338,7 @@ def _append_square_via_tris(
     z0: float,
     z1: float,
 ) -> None:
-    corners = _world_square_corners(placed, cx, cy, via)
+    corners = _world_square_corners(layout, placed, cx, cy, via)
     xs = [p[0] for p in corners]
     ys = [p[1] for p in corners]
     x0, x1 = min(xs), max(xs)
@@ -319,10 +355,12 @@ def export_compose_stl(layout: ComposeLayout, output_path: str | Path) -> Path:
         tuple[tuple[float, float, float], tuple[float, float, float], tuple[float, float, float]]
     ] = []
 
+    ox, oy = export_center_offset_mm(layout)
+
     for rect in iter_compose_stackup_rects(layout):
         z = rect.stackup.z_bounds_centered()
-        cx = (rect.x0 + rect.x1) / 2.0
-        cy = (rect.y0 + rect.y1) / 2.0
+        cx = (rect.x0 + rect.x1) / 2.0 - ox
+        cy = (rect.y0 + rect.y1) / 2.0 - oy
         lx = rect.x1 - rect.x0
         ly = rect.y1 - rect.y0
         for key in ("substrate", "bottom_copper", "top_copper"):
@@ -340,14 +378,14 @@ def export_compose_stl(layout: ComposeLayout, output_path: str | Path) -> Path:
                 copper_thickness_mm=module.stackup.copper_thickness_mm,
             )
             if _is_slot_via(scaled):
-                outline = _world_slot_outline(placed, cx, cy, scaled)
+                outline = _world_slot_outline(layout, placed, cx, cy, scaled)
                 triangles.extend(_extrude_polygon_tris(outline, z0, z1))
             elif scaled.via_type is CustomViaType.CIRCLE:
-                wx, wy = _world_point(placed, cx, cy, scaled.x_mm, scaled.y_mm)
+                wx, wy = _world_point(layout, placed, cx, cy, scaled.x_mm, scaled.y_mm)
                 radius = scaled.w_mm / 2.0 * max(placed.scale_x, placed.scale_y)
                 triangles.extend(_cylinder_triangles(wx, wy, z0, z1, radius))
             elif scaled.via_type is CustomViaType.SQUARE:
-                _append_square_via_tris(triangles, placed, cx, cy, scaled, z0, z1)
+                _append_square_via_tris(triangles, layout, placed, cx, cy, scaled, z0, z1)
 
     with output.open("wb") as fh:
         fh.write(b"\0" * 80)
@@ -421,9 +459,11 @@ def write_compose_parameter_report(
     if layout.ports:
         lines.extend(["", "[Port]"])
         for idx, port in enumerate(layout.ports, start=1):
+            stack = cell_stackup(layout, port.col, port.row)
+            h_port = stack.total_thickness_mm
             lines.append(
                 f"  Port{idx}: cell=({port.col},{port.row}) edge={port.edge} "
-                f"pos={port.position_mm:.4f} mm W={port.width_mm:.4f} mm"
+                f"pos={port.position_mm:.4f} mm W={port.width_mm:.4f} mm H={h_port:.4f} mm"
             )
 
     output.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -442,11 +482,13 @@ def write_compose_import_notes(
     fill_mat = get_material(layout.fill_material)
     z = stack.z_bounds_centered()
 
+    ox, oy = export_center_offset_mm(layout)
     text = f"""CST Studio Suite 匯入說明 - SIW Compose
 ========================================
 組合名稱：{design_name}
 網格：{layout.m_count}×{layout.n_count}，總尺寸 {layout.total_width_mm}×{layout.total_height_mm} mm
-原點：組合網格中心，Z 在堆疊中心
+原點：輸出幾何以基板外框／內容外框中心置中於 XY 原點，Z 在堆疊中心
+匯出平移：ΔX={ox:.4f} mm，ΔY={oy:.4f} mm（自版面座標減去）
 
 建議流程
 --------

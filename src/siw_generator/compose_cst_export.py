@@ -11,6 +11,9 @@ from siw_generator.compose_geometry import (
     PlacedModule,
     cell_bounds,
     cell_center,
+    cell_stackup,
+    export_center_offset_mm,
+    port_aperture_span,
     transform_placed_local,
 )
 from siw_generator.custom_geometry import CustomVia, CustomViaType, via_copper_z_range_mm
@@ -18,13 +21,23 @@ from siw_generator.cst_export import (
     _COPPER_MATERIAL,
     _fmt,
     _vba_clear_project_sub,
-    _vba_define_copper_material,
     _vba_ensure_material_from_library_sub,
 )
 from siw_generator.materials import SubstrateMaterial, get_material
+
 _VIA_INDEX = 0
 _BRICK_INDEX = 0
 _RECT_EPS = 1e-4
+_EXPORT_OX = 0.0
+_EXPORT_OY = 0.0
+
+
+def _sx(value: float) -> float:
+    return value - _EXPORT_OX
+
+
+def _sy(value: float) -> float:
+    return value - _EXPORT_OY
 
 
 def _next_via_name() -> str:
@@ -145,8 +158,8 @@ def _vba_brick_direct(
         f'        .Name "{name}"',
         f'        .Component "{component}"',
         f'        .Material "{material}"',
-        f"        .Xrange {_rng(x0, x1)}",
-        f"        .Yrange {_rng(y0, y1)}",
+        f"        .Xrange {_rng(_sx(x0), _sx(x1))}",
+        f"        .Yrange {_rng(_sy(y0), _sy(y1))}",
         f"        .Zrange {z_rng}",
         "        .Create",
         "    End With",
@@ -167,8 +180,8 @@ def _vba_cylinder_direct(
         '        .Component "vias"',
         f'        .Material "{_COPPER_MATERIAL}"',
         '        .Axis "z"',
-        f'        .Xcenter "{_fmt(cx)}"',
-        f'        .Ycenter "{_fmt(cy)}"',
+        f'        .Xcenter "{_fmt(_sx(cx))}"',
+        f'        .Ycenter "{_fmt(_sy(cy))}"',
         '        .Zcenter "0"',
         f'        .OuterRadius "{_fmt(radius)}"',
         '        .InnerRadius "0"',
@@ -180,36 +193,30 @@ def _vba_cylinder_direct(
 
 def _vba_port_direct(port_index: int, port: ComposePort, layout: ComposeLayout) -> list[str]:
     x0, y0, x1, y1 = cell_bounds(port.col, port.row, layout)
-    half_w = port.width_mm / 2.0
+    span_lo, span_hi = port_aperture_span(port)
     if port.edge == "left":
         px = x0
-        y_lo, y_hi = port.position_mm - half_w, port.position_mm + half_w
         orientation = "xmin"
-        x_rng = _rng(px, px)
-        y_rng = _rng(y_lo, y_hi)
+        x_rng = _rng(_sx(px), _sx(px))
+        y_rng = _rng(_sy(span_lo), _sy(span_hi))
     elif port.edge == "right":
         px = x1
-        y_lo, y_hi = port.position_mm - half_w, port.position_mm + half_w
         orientation = "xmax"
-        x_rng = _rng(px, px)
-        y_rng = _rng(y_lo, y_hi)
+        x_rng = _rng(_sx(px), _sx(px))
+        y_rng = _rng(_sy(span_lo), _sy(span_hi))
     elif port.edge == "bottom":
         py = y0
-        x_lo, x_hi = port.position_mm - half_w, port.position_mm + half_w
         orientation = "ymin"
-        x_rng = _rng(x_lo, x_hi)
-        y_rng = _rng(py, py)
+        x_rng = _rng(_sx(span_lo), _sx(span_hi))
+        y_rng = _rng(_sy(py), _sy(py))
     else:
         py = y1
-        x_lo, x_hi = port.position_mm - half_w, port.position_mm + half_w
         orientation = "ymax"
-        x_rng = _rng(x_lo, x_hi)
-        y_rng = _rng(py, py)
+        x_rng = _rng(_sx(span_lo), _sx(span_hi))
+        y_rng = _rng(_sy(py), _sy(py))
 
-    h = layout.fill_stackup.substrate_height_mm
-    cu = layout.fill_stackup.copper_thickness_mm
-    z_lo = -h / 2.0 - cu
-    z_hi = z_lo + min(h * 0.5, h)
+    stackup = cell_stackup(layout, port.col, port.row)
+    z_lo, z_hi = stackup.z_bounds_centered()["full_stack"]
     return [
         "    With Port",
         "        .Reset",
@@ -471,6 +478,48 @@ def _vba_define_material_literal_sub(sub_name: str, mat: SubstrateMaterial) -> l
     ]
 
 
+def _vba_compose_main_material_calls(materials: dict[str, SubstrateMaterial]) -> list[str]:
+    """Compose CST macro: copper (library-equivalent), then substrate ensure+define."""
+    lines: list[str] = [
+        "    Call EnsureCopperMaterial",
+        "",
+    ]
+    for key in materials:
+        safe = _mat_sub_key(key)
+        lines.append(f"    Call EnsureComposeMat_{safe}")
+        lines.append("")
+        lines.append(f"    Call DefineComposeMat_{safe}")
+        lines.append("")
+    return lines
+
+
+def _vba_define_compose_copper_annealed() -> list[str]:
+    """Define Copper (annealed) as Lossy metal (matches CST Default material library)."""
+    name = _COPPER_MATERIAL
+    return [
+        "Sub EnsureCopperMaterial()",
+        f"    ' Compose: \"{name}\" Lossy metal, sigma=5.8e7 S/m (library-equivalent)",
+        "    On Error Resume Next",
+        f'    Material.Delete "{name}"',
+        "    On Error GoTo 0",
+        "    With Material",
+        "        .Reset",
+        f'        .Name "{name}"',
+        '        .FrqType "all"',
+        '        .Type "Lossy metal"',
+        '        .MaterialUnit "Frequency", "GHz"',
+        '        .MaterialUnit "Geometry", "mm"',
+        '        .Mu "1.0"',
+        '        .Kappa "5.8e+007"',
+        '        .Rho "8930.0"',
+        '        .Colour "1.0", "1.0", "0.0"',
+        "        .Create",
+        "    End With",
+        "End Sub",
+        "",
+    ]
+
+
 def _vba_material_helpers(materials: dict[str, SubstrateMaterial]) -> list[str]:
     lines: list[str] = []
     for key, mat in materials.items():
@@ -485,7 +534,7 @@ def _vba_material_helpers(materials: dict[str, SubstrateMaterial]) -> list[str]:
             )
         )
         lines.extend(_vba_define_material_literal_sub(define, mat))
-    lines.extend(_vba_define_copper_material())
+    lines.extend(_vba_define_compose_copper_annealed())
     return lines
 
 
@@ -495,16 +544,17 @@ def build_compose_cst_vba_text(
     title: str = "Compose",
     clear_existing: bool = True,
 ) -> str:
-    global _VIA_INDEX, _BRICK_INDEX  # noqa: PLW0603
+    global _VIA_INDEX, _BRICK_INDEX, _EXPORT_OX, _EXPORT_OY  # noqa: PLW0603
     _VIA_INDEX = 0
     _BRICK_INDEX = 0
+    _EXPORT_OX, _EXPORT_OY = export_center_offset_mm(layout)
 
     materials = _collect_materials(layout)
 
     lines: list[str] = [
-        "' CST VBA macro - SIW compose layout (direct .Create)",
+        "' CST VBA macro - SIW compose layout",
         f"' Compose: {title}",
-        "' Units: mm | Origin: grid center, Z at stack center",
+        f"' Units: mm | Origin: XY centered (offset {_fmt(_EXPORT_OX)}, {_fmt(_EXPORT_OY)} mm), Z at stack center",
         "' Re-run macro to rebuild geometry",
         "",
         "Sub Main",
@@ -512,10 +562,8 @@ def build_compose_cst_vba_text(
     ]
     if clear_existing:
         lines.extend(["    Call ClearPreviousCompose", ""])
-    lines.extend(["    Call DefineCopperMaterial", ""])
-    for key in materials:
-        lines.append(f"    Call EnsureComposeMat_{_mat_sub_key(key)}")
-    lines.extend(["", "    Call EnsureComposeComponents", ""])
+    lines.extend(_vba_compose_main_material_calls(materials))
+    lines.extend(["    Call EnsureComposeComponents", ""])
 
     if layout.substrate_frame is not None:
         fx0, fy0, fx1, fy1 = layout.substrate_frame
@@ -562,6 +610,7 @@ def build_compose_cst_vba_text(
         lines.extend(_vba_port_direct(idx, port, layout))
         lines.append("")
 
+    lines.append("    ' Geometry exported centered at XY origin; press Space in CST to fit view")
     lines.append("End Sub")
     lines.append("")
     lines.extend(_vba_material_helpers(materials))

@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from siw_generator.app_paths import module_dir, recipe_dir
-from siw_generator.compose_geometry import ComposeLayout, ComposePort, PlacedModule
+from siw_generator.compose_geometry import ComposeLayout, ComposePort, PlacedModule, sync_layout_geometry
 from siw_generator.custom_io import load_module_file
 from siw_generator.export_paths import resolve_recipe_stem
 from siw_generator.stackup import StackupParams
@@ -153,6 +153,7 @@ def layout_from_dict(data: dict[str, Any]) -> tuple[ComposeLayout, str, dict[str
         )
     recipe_name = str(data.get("recipe_name", "")).strip()
     grid_vars = {str(k): str(v) for k, v in (data.get("grid_vars") or {}).items()}
+    sync_layout_geometry(layout)
     return layout, recipe_name, grid_vars
 
 

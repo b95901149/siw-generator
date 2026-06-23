@@ -18,6 +18,7 @@ from siw_generator.compose_geometry import (
     cell_bounds,
     cell_center,
     column_boundaries,
+    port_aperture_span,
     row_boundaries,
     transform_local,
 )
@@ -246,31 +247,20 @@ def _draw_substrate_frame_outline(ax, frame: tuple[float, float, float, float]) 
 
 
 def _draw_port(ax, layout: ComposeLayout, port: ComposePort) -> None:
-    if port.via_index_2 >= 0 and abs(port.span_b_mm - port.span_a_mm) > 1e-6:
-        x0, y0, x1, y1 = cell_bounds(port.col, port.row, layout)
-        if port.edge in ("left", "right"):
-            x = x0 if port.edge == "left" else x1
-            xs = [x, x]
-            ys = [port.span_a_mm, port.span_b_mm]
-        else:
-            y = y0 if port.edge == "bottom" else y1
-            xs = [port.span_a_mm, port.span_b_mm]
-            ys = [y, y]
+    x0, y0, x1, y1 = cell_bounds(port.col, port.row, layout)
+    span_lo, span_hi = port_aperture_span(port)
+    if port.edge == "left":
+        xs = [x0, x0]
+        ys = [span_lo, span_hi]
+    elif port.edge == "right":
+        xs = [x1, x1]
+        ys = [span_lo, span_hi]
+    elif port.edge == "bottom":
+        xs = [span_lo, span_hi]
+        ys = [y0, y0]
     else:
-        x0, y0, x1, y1 = cell_bounds(port.col, port.row, layout)
-        half_w = port.width_mm / 2.0
-        if port.edge == "left":
-            xs = [x0, x0]
-            ys = [port.position_mm - half_w, port.position_mm + half_w]
-        elif port.edge == "right":
-            xs = [x1, x1]
-            ys = [port.position_mm - half_w, port.position_mm + half_w]
-        elif port.edge == "bottom":
-            xs = [port.position_mm - half_w, port.position_mm + half_w]
-            ys = [y0, y0]
-        else:
-            xs = [port.position_mm - half_w, port.position_mm + half_w]
-            ys = [y1, y1]
+        xs = [span_lo, span_hi]
+        ys = [y1, y1]
     ax.plot(xs, ys, color="#7b1fa2", linewidth=3.0, solid_capstyle="butt", alpha=0.9)
 
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "siw-generator"
-version = "0.9.0beta"
+version = "0.9.1beta"
 description = "SIW generator"
 readme = "README.md"
 requires-python = ">=3.11"

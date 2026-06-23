@@ -27,10 +27,12 @@ from siw_generator.compose_geometry import (
     place_module,
     remove_placed_module,
     remove_port,
+    recompute_all_port_positions,
     resolve_operation_rect,
     rotate_clockwise,
     rotate_placed,
     sync_pitch_from_placements,
+    sync_layout_geometry,
 )
 from siw_generator.compose_io import (
     layout_from_dict,
@@ -56,10 +58,17 @@ from siw_generator.gui_preview import (
     saved_limits,
 )
 from siw_generator.gui_module_panel import make_transparent_red_button
+from siw_generator.materials import (
+    default_substrate_display_name,
+    get_material,
+    resolve_material_key,
+    substrate_display_names,
+)
 from siw_generator.operation_log import log_operation
 from siw_generator.stackup import StackupParams
 
-_COMPOSE_MODULE_ROW_PX = 427
+_COMPOSE_MODULE_ROW_PX = 300
+_PORT_SECTION_MIN_PX = 140
 _COMPOSE_THUMB_FIGSIZE = (2.6, 5.1)
 _PORT_TREE_HEIGHT = 6
 _PORT_COL_MINWIDTHS = {
@@ -114,6 +123,7 @@ class ComposePanel(ttk.Frame):
             "default_pitch_y": tk.StringVar(value="10.0"),
             "fill_height": tk.StringVar(value="0.127"),
             "fill_copper_um": tk.StringVar(value="15"),
+            "fill_material": tk.StringVar(value=default_substrate_display_name()),
             "leakage_margin_factor": tk.StringVar(value="0.5"),
             "import_length": tk.StringVar(value="10.0"),
             "import_width": tk.StringVar(value="10.0"),
@@ -124,6 +134,7 @@ class ComposePanel(ttk.Frame):
 
         self._build_ui()
         self._setup_traces()
+        self._update_fill_material_info()
         self.refresh_module_list()
         self._refresh_all()
 
@@ -147,7 +158,7 @@ class ComposePanel(ttk.Frame):
         return hints.get(mode, "")
 
     def _setup_traces(self) -> None:
-        for key in ("m_count", "n_count", "default_pitch_x", "default_pitch_y", "fill_height", "fill_copper_um"):
+        for key in ("m_count", "n_count", "default_pitch_x", "default_pitch_y", "fill_height", "fill_copper_um", "fill_material"):
             self._vars[key].trace_add("write", self._schedule_refresh)
         for key in ("import_length", "import_width", "import_height", "import_copper_um"):
             self._vars[key].trace_add("write", self._on_import_param_change)
@@ -255,6 +266,26 @@ class ComposePanel(ttk.Frame):
 
         fill_row = ttk.LabelFrame(mode_fill_row, text="填補基板 stackup", padding=6)
         fill_row.grid(row=0, column=1, sticky="nsew", padx=(3, 0))
+        mat_line = ttk.Frame(fill_row)
+        mat_line.pack(fill=tk.X, pady=(0, 4))
+        ttk.Label(mat_line, text="基板材料").pack(side=tk.LEFT)
+        fill_material_combo = ttk.Combobox(
+            mat_line,
+            textvariable=self._vars["fill_material"],
+            values=substrate_display_names(),
+            state="readonly",
+            width=24,
+        )
+        fill_material_combo.pack(side=tk.LEFT, padx=(6, 0), fill=tk.X, expand=True)
+        fill_material_combo.bind("<<ComboboxSelected>>", self._on_fill_material_change)
+        self._fill_material_info = tk.StringVar(value="")
+        ttk.Label(
+            fill_row,
+            textvariable=self._fill_material_info,
+            foreground="#555",
+            wraplength=220,
+            justify=tk.LEFT,
+        ).pack(anchor="w", pady=(0, 4))
         stack_line = ttk.Frame(fill_row)
         stack_line.pack(fill=tk.X)
         ttk.Label(stack_line, text="h (mm)").pack(side=tk.LEFT)
@@ -275,7 +306,7 @@ class ComposePanel(ttk.Frame):
         bottom_row.pack(fill=tk.BOTH, expand=True, pady=(0, 4))
         bottom_row.columnconfigure(0, weight=1, uniform="bottomhalf")
         bottom_row.columnconfigure(1, weight=1, uniform="bottomhalf")
-        bottom_row.rowconfigure(0, weight=1)
+        bottom_row.rowconfigure(0, weight=1, minsize=_PORT_SECTION_MIN_PX)
 
         port_wrap = ttk.LabelFrame(bottom_row, text="Port 列表", padding=4)
         port_wrap.grid(row=0, column=0, sticky="nsew", padx=(0, 3))
@@ -656,6 +687,14 @@ class ComposePanel(ttk.Frame):
         self._operation_steps.clear()
         self._redo_steps.clear()
         self._apply_grid_vars(grid_vars)
+        from siw_generator.custom_io import material_display_for_key
+
+        self._updating = True
+        try:
+            self._vars["fill_material"].set(material_display_for_key(layout.fill_material))
+        finally:
+            self._updating = False
+        self._update_fill_material_info()
         self._refresh_port_tree()
         self._refresh_all()
         return True
@@ -663,7 +702,7 @@ class ComposePanel(ttk.Frame):
     def _grid_vars_dict(self) -> dict[str, str]:
         keys = (
             "m_count", "n_count", "default_pitch_x", "default_pitch_y",
-            "fill_height", "fill_copper_um", "leakage_margin_factor",
+            "fill_height", "fill_copper_um", "fill_material", "leakage_margin_factor",
             "import_length", "import_width", "import_height", "import_copper_um",
         )
         return {k: self._vars[k].get() for k in keys}
@@ -874,6 +913,25 @@ class ComposePanel(ttk.Frame):
             raise ValueError("填補基板 h、Cu 須大於 0")
         return StackupParams(substrate_height_mm=h, copper_thickness_mm=cu_um / 1000.0)
 
+    def _fill_material_key(self) -> str:
+        return resolve_material_key(self._vars["fill_material"].get())
+
+    def _update_fill_material_info(self) -> None:
+        try:
+            mat = get_material(self._fill_material_key())
+            tand = f"{mat.tan_delta:g}" if mat.tan_delta else "0"
+            self._fill_material_info.set(
+                f"εr={mat.er:g}  |  tanδ={tand}  |  CST：{mat.cst_material_name}"
+            )
+        except ValueError:
+            self._fill_material_info.set("")
+
+    def _on_fill_material_change(self, *_args: object) -> None:
+        if self._updating:
+            return
+        self._update_fill_material_info()
+        self._schedule_refresh()
+
     def _parse_leakage_margin_factor(self) -> float:
         from siw_generator.siw_geometry import DEFAULT_LEAKAGE_MARGIN_FACTOR, clamp_leakage_margin_factor
 
@@ -909,6 +967,7 @@ class ComposePanel(ttk.Frame):
                 f"已設定外框（已補齊至含所有 module）"
                 f" X=[{frame[0]:.2f},{frame[2]:.2f}] Y=[{frame[1]:.2f},{frame[3]:.2f}] mm"
             )
+            self._refresh_port_tree()
             self._refresh_main()
         except ValueError as exc:
             self._status.set(f"錯誤：{exc}")
@@ -921,6 +980,7 @@ class ComposePanel(ttk.Frame):
             frame = compute_leakage_substrate_frame(self._layout, axis="x", margin_factor=factor)
             self._push_undo()
             self._layout.substrate_frame = frame
+            recompute_all_port_positions(self._layout)
             log_operation("compose", "基板 X 防洩漏", f"margin={margin:.4f} mm")
             self._record_step("leakage_x", f"margin={margin:.4f} mm", margin_factor=factor, frame=list(frame))
             self._status.set(
@@ -939,6 +999,7 @@ class ComposePanel(ttk.Frame):
             frame = compute_leakage_substrate_frame(self._layout, axis="y", margin_factor=factor)
             self._push_undo()
             self._layout.substrate_frame = frame
+            recompute_all_port_positions(self._layout)
             log_operation("compose", "基板 Y 防洩漏", f"margin={margin:.4f} mm")
             self._record_step("leakage_y", f"margin={margin:.4f} mm", margin_factor=factor, frame=list(frame))
             self._status.set(
@@ -981,11 +1042,11 @@ class ComposePanel(ttk.Frame):
             placements=kept,
             filled_cells=kept_fills,
             fill_stackup=fill_stackup,
-            fill_material=self._layout.fill_material,
+            fill_material=self._fill_material_key(),
             ports=kept_ports,
             substrate_frame=self._layout.substrate_frame,
         )
-        sync_pitch_from_placements(layout)
+        sync_layout_geometry(layout)
         return layout
 
     def _apply_default_pitch_from_module(self) -> None:

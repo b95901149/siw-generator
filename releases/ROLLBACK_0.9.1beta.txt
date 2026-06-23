@@ -1,0 +1,9 @@
+SIW Via Generator — Release 0.9.1beta
+
+Build output: dist/SIW-Generator_0.9.1beta/
+
+Rollback:
+1. Keep the dist/SIW-Generator_0.9.1beta/ folder as a frozen snapshot.
+2. In git: tag this commit as v0.9.1beta
+   git tag -a v0.9.1beta -m "Milestone: compose CST copper Lossy metal, 0.9.1beta"
+   git branch release/0.9.1beta

@@ -88,7 +88,7 @@ Version: $Version
 Build: $buildTime
 Package: $PackageName
 
-Milestone release - keep this folder to roll back to 0.9.0beta.
+Milestone release - keep this folder to roll back to 0.9.1beta.
 "@
 Set-Content -Path (Join-Path $PackageDir "VERSION.txt") -Value $versionText -Encoding UTF8
 

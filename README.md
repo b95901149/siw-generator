@@ -3,7 +3,7 @@
 Python GUI 專案，用於設計 SIW Via 圍牆、Custom 模組與組合版面，並輸出 CST / HFSS 模擬檔案。
 
 <!-- AUTO_SCREENSHOTS_START -->
-**版本 0.9.0beta** — 圖形化設計 SIW Via 圍牆、Custom 模組與 M×N 組合版面，可輸出 **CST**（DXF / STL / VBA）、**HFSS** VBScript 與參數報告。
+**版本 0.9.1beta** — 圖形化設計 SIW Via 圍牆、Custom 模組與 M×N 組合版面，可輸出 **CST**（DXF / STL / VBA）、**HFSS** VBScript 與參數報告。
 
 | 分頁 | 功能 |
 |------|------|
