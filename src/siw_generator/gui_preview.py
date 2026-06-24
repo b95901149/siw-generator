@@ -29,6 +29,7 @@ def attach_zoomable_canvas(
     undo_label: str = "復原",
     redo_label: str = "下一步",
     enable_toolbar_pan: bool = True,
+    on_scroll: Callable[[object], bool] | None = None,
 ) -> tuple[ttk.LabelFrame, Figure, FigureCanvasTkAgg, dict[str, bool]]:
     """Create a label-framed preview with toolbar, scroll zoom, and reset."""
     frame = ttk.LabelFrame(parent, text=title, padding=2)
@@ -63,10 +64,13 @@ def attach_zoomable_canvas(
                 setattr(toolbar, attr, None)
     canvas.get_tk_widget().configure(takefocus=True)
     canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+    canvas._nav_toolbar = toolbar  # type: ignore[attr-defined]
 
     state = {"custom": False}
 
     def _on_scroll(event) -> None:
+        if on_scroll is not None and on_scroll(event):
+            return
         ax = figure.axes[0] if figure.axes else None
         if ax is None or event.inaxes != ax or event.xdata is None or event.ydata is None:
             return
