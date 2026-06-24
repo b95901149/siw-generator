@@ -1,0 +1,507 @@
+{
+  "format": "siw-generator-combination",
+  "version": 1,
+  "saved_at": "2026-06-23T23:30:57+08:00",
+  "title": "dualSIW",
+  "layout": {
+    "format": "siw-generator-compose-recipe",
+    "version": 1,
+    "recipe_name": "dualSIW",
+    "m_count": 3,
+    "n_count": 3,
+    "default_pitch_x_mm": 10.0,
+    "default_pitch_y_mm": 10.0,
+    "col_pitch_mm": [
+      10.0,
+      5.04,
+      5.04
+    ],
+    "row_pitch_mm": [
+      10.0,
+      5.0,
+      3.0
+    ],
+    "fill_material": "rt5880_lossy",
+    "fill_stackup": {
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0
+    },
+    "substrate_frame": [
+      0.0,
+      1.0,
+      10.0,
+      9.0
+    ],
+    "filled_cells": [],
+    "placements": [
+      {
+        "col": 1,
+        "row": 2,
+        "source": "RSIW-0_7mmWidth.json",
+        "label": "RSIW-0_7mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 2,
+        "row": 2,
+        "source": "RSIW-0_7mmWidth.json",
+        "label": "RSIW-0_7mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 2,
+        "row": 1,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.008,
+        "scale_y": 1.0
+      },
+      {
+        "col": 1,
+        "row": 1,
+        "source": "SSIW-120GHz_Slot8.json",
+        "label": "SSIW-120GHz_Slot8.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.008,
+        "scale_y": 1.0
+      }
+    ],
+    "ports": [
+      {
+        "col": 1,
+        "row": 2,
+        "edge": "left",
+        "position_mm": 7.5,
+        "width_mm": 0.6999999999999993,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": 7.15,
+        "span_b_mm": 7.85
+      },
+      {
+        "col": 2,
+        "row": 2,
+        "edge": "right",
+        "position_mm": 7.5,
+        "width_mm": 0.6999999999999993,
+        "via_index": 30,
+        "via_index_2": 31,
+        "span_a_mm": 7.15,
+        "span_b_mm": 7.85
+      },
+      {
+        "col": 1,
+        "row": 1,
+        "edge": "left",
+        "position_mm": 3.5,
+        "width_mm": 1.0269999999999997,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": 2.9865,
+        "span_b_mm": 4.0135
+      },
+      {
+        "col": 2,
+        "row": 1,
+        "edge": "right",
+        "position_mm": 3.5,
+        "width_mm": 1.0269999999999997,
+        "via_index": 6,
+        "via_index_2": 7,
+        "span_a_mm": 2.9865,
+        "span_b_mm": 4.0135
+      }
+    ],
+    "grid_vars": {
+      "m_count": "3",
+      "n_count": "3",
+      "default_pitch_x": "10.0",
+      "default_pitch_y": "10.0",
+      "fill_height": "0.127",
+      "fill_copper_um": "15",
+      "fill_material": "Rogers RT-duroid 5880 (lossy)",
+      "leakage_margin_factor": "0",
+      "import_length": "5.0000",
+      "import_width": "5.0000",
+      "import_height": "0.1270",
+      "import_copper_um": "15.0000"
+    }
+  },
+  "modules": {
+    "RSIW-0_7mmWidth.json": {
+      "format": "siw-generator-module",
+      "version": 1,
+      "kind": "rsiw",
+      "saved_at": "2026-06-23T23:30:57+08:00",
+      "title": "RSIW-0_7mmWidth",
+      "substrate_length_mm": 5.04,
+      "substrate_width_mm": 3.0,
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0,
+      "material": "rt5880_lossy",
+      "center_freq_ghz": 1.0,
+      "vias": [
+        {
+          "x_mm": -2.3800000000000003,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.3800000000000003,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.1,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.1,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.8200000000000003,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.8200000000000003,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.54,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.54,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.2600000000000002,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.2600000000000002,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.9800000000000001,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.9800000000000001,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.7000000000000001,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.7000000000000001,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.42000000000000004,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.42000000000000004,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.14,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.14,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.14,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.14,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.42000000000000004,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.42000000000000004,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.7000000000000001,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.7000000000000001,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.9800000000000001,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.9800000000000001,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.2600000000000002,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.2600000000000002,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.54,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.54,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.8200000000000003,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.8200000000000003,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.1,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.1,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.3800000000000003,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.3800000000000003,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        }
+      ],
+      "siw_width_mm": 0.7,
+      "via_diameter_mm": 0.15,
+      "via_pitch_mm": 0.28
+    },
+    "SSIW-120GHz_Slot8.json": {
+      "format": "siw-generator-module",
+      "version": 1,
+      "kind": "ssiw",
+      "saved_at": "2026-06-23T23:30:57+08:00",
+      "title": "SSIW-120GHz_Slot8",
+      "substrate_length_mm": 5.0,
+      "substrate_width_mm": 5.0,
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0,
+      "material": "rt5880_lossy",
+      "center_freq_ghz": 120.0,
+      "vias": [
+        {
+          "x_mm": -1.9500000000000002,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -1.9500000000000002,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -0.65,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -0.65,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 0.65,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 0.65,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 1.9500000000000002,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 1.9500000000000002,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        }
+      ],
+      "siw_width_mm": 1.027,
+      "slot_width_mm": 0.15,
+      "slot_length_mm": 1.0,
+      "slot_corner_r_mm": 0.015,
+      "slot_pitch_mm": 1.3
+    }
+  },
+  "operations": [],
+  "undo_snapshots": [],
+  "redo_snapshots": [],
+  "redo_steps": []
+}

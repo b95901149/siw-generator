@@ -1,0 +1,1979 @@
+{
+  "format": "siw-generator-combination",
+  "version": 1,
+  "saved_at": "2026-06-23T23:52:46+08:00",
+  "title": "ranSIW",
+  "layout": {
+    "format": "siw-generator-compose-recipe",
+    "version": 1,
+    "recipe_name": "ranSIW",
+    "m_count": 7,
+    "n_count": 3,
+    "default_pitch_x_mm": 10.0,
+    "default_pitch_y_mm": 10.0,
+    "col_pitch_mm": [
+      10.0,
+      5.04,
+      5.0,
+      5.0,
+      5.0,
+      5.04,
+      10.0
+    ],
+    "row_pitch_mm": [
+      10.0,
+      5.0,
+      5.04
+    ],
+    "fill_material": "rt5880_lossy",
+    "fill_stackup": {
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0
+    },
+    "substrate_frame": [
+      -12.54,
+      -0.019999999999999574,
+      12.540000000000001,
+      10.02
+    ],
+    "filled_cells": [],
+    "placements": [
+      {
+        "col": 3,
+        "row": 1,
+        "source": "ctm-rand1.json",
+        "label": "ctm-rand1.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 4,
+        "row": 1,
+        "source": "ctm-rand1.json",
+        "label": "ctm-rand1.json",
+        "rotation_deg": 90,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 2,
+        "row": 1,
+        "source": "ctm-rand1.json",
+        "label": "ctm-rand1.json",
+        "rotation_deg": 180,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.0
+      },
+      {
+        "col": 1,
+        "row": 1,
+        "source": "RSIW-0_7mmWidth.json",
+        "label": "RSIW-0_7mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.6666666666666667
+      },
+      {
+        "col": 5,
+        "row": 1,
+        "source": "RSIW-0_7mmWidth.json",
+        "label": "RSIW-0_7mmWidth.json",
+        "rotation_deg": 0,
+        "mirror_x": false,
+        "scale_x": 1.0,
+        "scale_y": 1.6666666666666667
+      },
+      {
+        "col": 3,
+        "row": 2,
+        "source": "RSIW-0_7mmWidth.json",
+        "label": "RSIW-0_7mmWidth.json",
+        "rotation_deg": 90,
+        "mirror_x": false,
+        "scale_x": 1.6666666666666667,
+        "scale_y": 1.0
+      }
+    ],
+    "ports": [
+      {
+        "col": 1,
+        "row": 1,
+        "edge": "left",
+        "position_mm": 2.4800000000000004,
+        "width_mm": 1.166666666666667,
+        "via_index": 0,
+        "via_index_2": 1,
+        "span_a_mm": 1.896666666666667,
+        "span_b_mm": 3.063333333333334
+      },
+      {
+        "col": 5,
+        "row": 1,
+        "edge": "right",
+        "position_mm": 2.4800000000000004,
+        "width_mm": 1.166666666666667,
+        "via_index": 26,
+        "via_index_2": 27,
+        "span_a_mm": 1.896666666666667,
+        "span_b_mm": 3.063333333333334
+      },
+      {
+        "col": 3,
+        "row": 2,
+        "edge": "top",
+        "position_mm": 8.881784197001252e-16,
+        "width_mm": 0.7,
+        "via_index": 2,
+        "via_index_2": 3,
+        "span_a_mm": -0.3499999999999991,
+        "span_b_mm": 0.35000000000000087
+      }
+    ],
+    "grid_vars": {
+      "m_count": "7",
+      "n_count": "3",
+      "default_pitch_x": "10.0",
+      "default_pitch_y": "10.0",
+      "fill_height": "0.127",
+      "fill_copper_um": "15",
+      "fill_material": "Rogers RT-duroid 5880 (lossy)",
+      "leakage_margin_factor": "0",
+      "import_length": "5.0400",
+      "import_width": "3.0000",
+      "import_height": "0.1270",
+      "import_copper_um": "15.0000"
+    }
+  },
+  "modules": {
+    "ctm-rand1.json": {
+      "format": "siw-generator-module",
+      "version": 1,
+      "kind": "custom",
+      "saved_at": "2026-06-23T23:52:46+08:00",
+      "title": "ctm-rand1",
+      "substrate_length_mm": 5.0,
+      "substrate_width_mm": 5.0,
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0,
+      "material": "rt5880_lossy",
+      "center_freq_ghz": 120.0,
+      "vias": [
+        {
+          "x_mm": -1.5281208467049159,
+          "y_mm": 0.3922525851729386,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.9770494991733916,
+          "y_mm": 0.5245097085805046,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.5692567020000636,
+          "y_mm": 0.9543453596550941,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.051249635320430365,
+          "y_mm": 1.2849881681740083,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.4777788583098328,
+          "y_mm": 1.1747738986677039,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.8965930824337915,
+          "y_mm": 1.0094524944082464,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.0398716327919884,
+          "y_mm": 0.7228953936918536,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.4476644299653163,
+          "y_mm": 0.4804240007779823,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.8554572271386442,
+          "y_mm": 0.24897403481474267,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.064864339200624,
+          "y_mm": -0.05962591980291165,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.8697850821744613,
+          "y_mm": -1.2609614574216348,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.417906577198611,
+          "y_mm": -1.2940257382735263,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.8778566566177171,
+          "y_mm": -1.4593471425329834,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.6464066906544765,
+          "y_mm": -1.6246685467924409,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.3157638821355624,
+          "y_mm": -1.856118512755681,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.3565431618528976,
+          "y_mm": -2.0214399170151385,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.8635288015819,
+          "y_mm": -1.9112256475088336,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.271321598755228,
+          "y_mm": -1.6577328276443324,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.6460501150766653,
+          "y_mm": -1.3381114460760481,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.9766929235955795,
+          "y_mm": -1.1948328957178518,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.186456611235371,
+          "y_mm": 1.1196667639145508,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.417906577198611,
+          "y_mm": 1.3290738759765306,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.5611851275568074,
+          "y_mm": 1.5164381341372488,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.7044636779150037,
+          "y_mm": 1.6927809653473362,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.7816136665694176,
+          "y_mm": 1.902188077409316,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.8036565204706783,
+          "y_mm": 2.045466627767512,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.7672858115336005,
+          "y_mm": 1.0094524944082464,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.943628642743688,
+          "y_mm": 1.1747738986677039,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.1089500470031455,
+          "y_mm": 1.6817595383967063,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.0869071931018848,
+          "y_mm": 1.8801452235080554,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.22428603844533157,
+          "y_mm": 1.6046095497422925,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.24632889234659316,
+          "y_mm": 1.7258452461992277,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.21326461149470166,
+          "y_mm": 1.8911666504586853,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.18020033064281016,
+          "y_mm": 2.1336380433725566,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.6353852637038466,
+          "y_mm": 0.5906382702842876,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.4480210055431284,
+          "y_mm": 0.3702097312716779,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.4369995785924976,
+          "y_mm": 0.08365263055528516,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.0729359136438799,
+          "y_mm": 0.4363382929754609,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.8084216668287478,
+          "y_mm": 0.19386690006158958,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.6541216895199211,
+          "y_mm": -0.13677590845732457,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.4590424324937583,
+          "y_mm": -1.3601542999773093,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.3708710168887146,
+          "y_mm": -1.2609614574216348,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.2716781743330401,
+          "y_mm": -0.908275795001459,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.1721287561995544,
+          "y_mm": -1.3711757269279397,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.1170216214464013,
+          "y_mm": -1.2940257382735263,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.8304645207300085,
+          "y_mm": -0.9744043567052421,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.6871859703718126,
+          "y_mm": -0.8090829524457845,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.8918279360757224,
+          "y_mm": -2.164718467373335,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.5060779928036552,
+          "y_mm": -1.9553113553113555,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.0982851956303268,
+          "y_mm": -1.745904243249376,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.197121462608189,
+          "y_mm": -2.241868456027748,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.9546500696943188,
+          "y_mm": -2.142675613472074,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.8113715193361228,
+          "y_mm": -2.0434827709163996,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.8256993743719394,
+          "y_mm": 0.09467405750591595,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.0681707672858103,
+          "y_mm": -0.11473305455606386,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.2114493176440067,
+          "y_mm": -0.21392589711173837,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.0571493403351795,
+          "y_mm": -1.040532918409025,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.266556452397159,
+          "y_mm": -0.908275795001459,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.3073357321144945,
+          "y_mm": -0.2910758857661513,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.329378586015755,
+          "y_mm": -1.0735971992609166,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        }
+      ]
+    },
+    "RSIW-0_7mmWidth.json": {
+      "format": "siw-generator-module",
+      "version": 1,
+      "kind": "rsiw",
+      "saved_at": "2026-06-23T23:52:46+08:00",
+      "title": "RSIW-0_7mmWidth",
+      "substrate_length_mm": 5.04,
+      "substrate_width_mm": 3.0,
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0,
+      "material": "rt5880_lossy",
+      "center_freq_ghz": 1.0,
+      "vias": [
+        {
+          "x_mm": -2.3800000000000003,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.3800000000000003,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.1,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -2.1,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.8200000000000003,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.8200000000000003,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.54,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.54,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.2600000000000002,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -1.2600000000000002,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.9800000000000001,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.9800000000000001,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.7000000000000001,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.7000000000000001,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.42000000000000004,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.42000000000000004,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.14,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": -0.14,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.14,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.14,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.42000000000000004,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.42000000000000004,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.7000000000000001,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.7000000000000001,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.9800000000000001,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 0.9800000000000001,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.2600000000000002,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.2600000000000002,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.54,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.54,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.8200000000000003,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 1.8200000000000003,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.1,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.1,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.3800000000000003,
+          "y_mm": -0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        },
+        {
+          "x_mm": 2.3800000000000003,
+          "y_mm": 0.35,
+          "type": "circle",
+          "w_mm": 0.15,
+          "h_mm": 0.15
+        }
+      ],
+      "siw_width_mm": 0.7,
+      "via_diameter_mm": 0.15,
+      "via_pitch_mm": 0.28
+    },
+    "SSIW-120GHz_Slot8.json": {
+      "format": "siw-generator-module",
+      "version": 1,
+      "kind": "ssiw",
+      "saved_at": "2026-06-23T23:52:46+08:00",
+      "title": "SSIW-120GHz_Slot8",
+      "substrate_length_mm": 5.0,
+      "substrate_width_mm": 5.0,
+      "substrate_height_mm": 0.127,
+      "copper_thickness_um": 15.0,
+      "material": "rt5880_lossy",
+      "center_freq_ghz": 120.0,
+      "vias": [
+        {
+          "x_mm": -1.9500000000000002,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -1.9500000000000002,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -0.65,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": -0.65,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 0.65,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 0.65,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 1.9500000000000002,
+          "y_mm": -0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        },
+        {
+          "x_mm": 1.9500000000000002,
+          "y_mm": 0.5135,
+          "type": "slot",
+          "w_mm": 0.15,
+          "h_mm": 0.15,
+          "length_mm": 1.0,
+          "corner_r_mm": 0.015
+        }
+      ],
+      "siw_width_mm": 1.027,
+      "slot_width_mm": 0.15,
+      "slot_length_mm": 1.0,
+      "slot_corner_r_mm": 0.015,
+      "slot_pitch_mm": 1.3
+    }
+  },
+  "operations": [
+    {
+      "seq": 1,
+      "action": "clear_layout",
+      "detail": "清空組合"
+    },
+    {
+      "seq": 2,
+      "action": "place_module",
+      "detail": "cell (3,1) ctm-rand1.json",
+      "col": 3,
+      "row": 1,
+      "source": "ctm-rand1.json",
+      "rotation_deg": 0,
+      "mirror_x": false
+    },
+    {
+      "seq": 3,
+      "action": "place_module",
+      "detail": "cell (4,1) ctm-rand1.json",
+      "col": 4,
+      "row": 1,
+      "source": "ctm-rand1.json",
+      "rotation_deg": 90,
+      "mirror_x": false
+    },
+    {
+      "seq": 4,
+      "action": "place_module",
+      "detail": "cell (2,1) ctm-rand1.json",
+      "col": 2,
+      "row": 1,
+      "source": "ctm-rand1.json",
+      "rotation_deg": 180,
+      "mirror_x": false
+    },
+    {
+      "seq": 5,
+      "action": "place_module",
+      "detail": "cell (1,1) RSIW-0_7mmWidth.json new_pitch",
+      "col": 1,
+      "row": 1,
+      "source": "RSIW-0_7mmWidth.json",
+      "rotation_deg": 0,
+      "mirror_x": false,
+      "pitch_mode": "new_module"
+    },
+    {
+      "seq": 6,
+      "action": "place_module",
+      "detail": "cell (5,1) RSIW-0_7mmWidth.json new_pitch",
+      "col": 5,
+      "row": 1,
+      "source": "RSIW-0_7mmWidth.json",
+      "rotation_deg": 0,
+      "mirror_x": false,
+      "pitch_mode": "new_module"
+    },
+    {
+      "seq": 7,
+      "action": "place_module",
+      "detail": "cell (3,2) RSIW-0_7mmWidth.json ref (3, 1)",
+      "col": 3,
+      "row": 2,
+      "source": "RSIW-0_7mmWidth.json",
+      "rotation_deg": 90,
+      "mirror_x": false,
+      "ref_col": 3,
+      "ref_row": 1
+    },
+    {
+      "seq": 8,
+      "action": "add_port",
+      "detail": "cell (1,1) left",
+      "col": 1,
+      "row": 1,
+      "edge": "left"
+    },
+    {
+      "seq": 9,
+      "action": "add_port",
+      "detail": "cell (5,1) right",
+      "col": 5,
+      "row": 1,
+      "edge": "right"
+    },
+    {
+      "seq": 10,
+      "action": "add_port",
+      "detail": "cell (3,2) top",
+      "col": 3,
+      "row": 2,
+      "edge": "top"
+    },
+    {
+      "seq": 11,
+      "action": "cut_substrate",
+      "detail": "frame -12.54,-0.02–12.54,10.02",
+      "frame": [
+        -12.54,
+        -0.019999999999999574,
+        12.540000000000001,
+        10.02
+      ]
+    }
+  ],
+  "undo_snapshots": [
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 3,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        5.04,
+        5.04
+      ],
+      "row_pitch_mm": [
+        10.0,
+        5.0,
+        3.0
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": [
+        0.0,
+        1.0,
+        10.0,
+        9.0
+      ],
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 1,
+          "row": 2,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 2,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "source": "SSIW-120GHz_Slot8.json",
+          "label": "SSIW-120GHz_Slot8.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.008,
+          "scale_y": 1.0
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "source": "SSIW-120GHz_Slot8.json",
+          "label": "SSIW-120GHz_Slot8.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.008,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [
+        {
+          "col": 1,
+          "row": 2,
+          "edge": "left",
+          "position_mm": 7.5,
+          "width_mm": 0.6999999999999993,
+          "via_index": 0,
+          "via_index_2": 1,
+          "span_a_mm": 7.15,
+          "span_b_mm": 7.85
+        },
+        {
+          "col": 2,
+          "row": 2,
+          "edge": "right",
+          "position_mm": 7.5,
+          "width_mm": 0.6999999999999993,
+          "via_index": 30,
+          "via_index_2": 31,
+          "span_a_mm": 7.15,
+          "span_b_mm": 7.85
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "edge": "left",
+          "position_mm": 3.5,
+          "width_mm": 1.0269999999999997,
+          "via_index": 0,
+          "via_index_2": 1,
+          "span_a_mm": 2.9865,
+          "span_b_mm": 4.0135
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "edge": "right",
+          "position_mm": 3.5,
+          "width_mm": 1.0269999999999997,
+          "via_index": 6,
+          "via_index_2": 7,
+          "span_a_mm": 2.9865,
+          "span_b_mm": 4.0135
+        }
+      ],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        10.0,
+        10.0
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [],
+      "ports": [],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        10.0,
+        10.0,
+        5.0,
+        10.0,
+        10.0,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        5.0,
+        10.0
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        10.0,
+        10.0,
+        5.0,
+        5.0,
+        10.0,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        5.0,
+        10.0
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 4,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        10.0,
+        5.0,
+        5.0,
+        5.0,
+        10.0,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        5.0,
+        10.0
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 4,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 180,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        5.04,
+        5.0,
+        5.0,
+        5.0,
+        10.0,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        3.0,
+        10.0
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 4,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 180,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        5.04,
+        5.0,
+        5.0,
+        5.0,
+        5.04,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        3.0,
+        10.0
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 4,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 180,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 5,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        5.04,
+        5.0,
+        5.0,
+        5.0,
+        5.04,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        3.0,
+        10.0
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 4,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 180,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 5,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 3,
+          "row": 2,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.6666666666666667,
+          "scale_y": 1.9841269841269842
+        }
+      ],
+      "ports": [],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        5.04,
+        5.0,
+        5.0,
+        5.0,
+        5.04,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        5.0,
+        5.04
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 4,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 180,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.6666666666666667
+        },
+        {
+          "col": 5,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.6666666666666667
+        },
+        {
+          "col": 3,
+          "row": 2,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.6666666666666667,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [
+        {
+          "col": 1,
+          "row": 1,
+          "edge": "left",
+          "position_mm": 2.4800000000000004,
+          "width_mm": 1.166666666666667,
+          "via_index": 0,
+          "via_index_2": 1,
+          "span_a_mm": 1.896666666666667,
+          "span_b_mm": 3.063333333333334
+        }
+      ],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        5.04,
+        5.0,
+        5.0,
+        5.0,
+        5.04,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        5.0,
+        5.04
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 4,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 180,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.6666666666666667
+        },
+        {
+          "col": 5,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.6666666666666667
+        },
+        {
+          "col": 3,
+          "row": 2,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.6666666666666667,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [
+        {
+          "col": 1,
+          "row": 1,
+          "edge": "left",
+          "position_mm": 2.4800000000000004,
+          "width_mm": 1.166666666666667,
+          "via_index": 0,
+          "via_index_2": 1,
+          "span_a_mm": 1.896666666666667,
+          "span_b_mm": 3.063333333333334
+        },
+        {
+          "col": 5,
+          "row": 1,
+          "edge": "right",
+          "position_mm": 2.4800000000000004,
+          "width_mm": 1.166666666666667,
+          "via_index": 26,
+          "via_index_2": 27,
+          "span_a_mm": 1.896666666666667,
+          "span_b_mm": 3.063333333333334
+        }
+      ],
+      "grid_vars": {}
+    },
+    {
+      "format": "siw-generator-compose-recipe",
+      "version": 1,
+      "recipe_name": "",
+      "m_count": 7,
+      "n_count": 3,
+      "default_pitch_x_mm": 10.0,
+      "default_pitch_y_mm": 10.0,
+      "col_pitch_mm": [
+        10.0,
+        5.04,
+        5.0,
+        5.0,
+        5.0,
+        5.04,
+        10.0
+      ],
+      "row_pitch_mm": [
+        10.0,
+        5.0,
+        5.04
+      ],
+      "fill_material": "rt5880_lossy",
+      "fill_stackup": {
+        "substrate_height_mm": 0.127,
+        "copper_thickness_um": 15.0
+      },
+      "substrate_frame": null,
+      "filled_cells": [],
+      "placements": [
+        {
+          "col": 3,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 4,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 2,
+          "row": 1,
+          "source": "ctm-rand1.json",
+          "label": "ctm-rand1.json",
+          "rotation_deg": 180,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.0
+        },
+        {
+          "col": 1,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.6666666666666667
+        },
+        {
+          "col": 5,
+          "row": 1,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 0,
+          "mirror_x": false,
+          "scale_x": 1.0,
+          "scale_y": 1.6666666666666667
+        },
+        {
+          "col": 3,
+          "row": 2,
+          "source": "RSIW-0_7mmWidth.json",
+          "label": "RSIW-0_7mmWidth.json",
+          "rotation_deg": 90,
+          "mirror_x": false,
+          "scale_x": 1.6666666666666667,
+          "scale_y": 1.0
+        }
+      ],
+      "ports": [
+        {
+          "col": 1,
+          "row": 1,
+          "edge": "left",
+          "position_mm": 2.4800000000000004,
+          "width_mm": 1.166666666666667,
+          "via_index": 0,
+          "via_index_2": 1,
+          "span_a_mm": 1.896666666666667,
+          "span_b_mm": 3.063333333333334
+        },
+        {
+          "col": 5,
+          "row": 1,
+          "edge": "right",
+          "position_mm": 2.4800000000000004,
+          "width_mm": 1.166666666666667,
+          "via_index": 26,
+          "via_index_2": 27,
+          "span_a_mm": 1.896666666666667,
+          "span_b_mm": 3.063333333333334
+        },
+        {
+          "col": 3,
+          "row": 2,
+          "edge": "top",
+          "position_mm": 8.881784197001252e-16,
+          "width_mm": 0.7,
+          "via_index": 2,
+          "via_index_2": 3,
+          "span_a_mm": -0.3499999999999991,
+          "span_b_mm": 0.35000000000000087
+        }
+      ],
+      "grid_vars": {}
+    }
+  ],
+  "redo_snapshots": [],
+  "redo_steps": []
+}
